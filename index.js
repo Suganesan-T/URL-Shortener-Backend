@@ -311,14 +311,14 @@ app.post("/createshorturl", async (request, response) => {
             .insertMany([
                 {
                     longurl: longurl,
-                    shorturl: `https://url-shortener-backend-l2je.onrender.com/${shorturl}`,
+                    shorturl: `https://url-shortener-backend-l2je.onrender.com/geturl/${shorturl}`,
                     visit: 0,
                     createdAt: [{ date: date, month: month, year: year }],
                 },
             ]);
         const responseObj = {
             longurl: longurl,
-            shorturl: `https://url-shortener-backend-l2je.onrender.com/${shorturl}`
+            shorturl: `https://url-shortener-backend-l2je.onrender.com/geturl/${shorturl}`
         };
 
         response.status(200).json(responseObj);
