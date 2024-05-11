@@ -21,7 +21,7 @@ const PORT = process.env.PORT || 4000;
 app.use(express.json());
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://url-shortener-a.netlify.app',
     credentials: true
   }));
 
@@ -311,14 +311,14 @@ app.post("/createshorturl", async (request, response) => {
             .insertMany([
                 {
                     longurl: longurl,
-                    shorturl: `http://localhost:4000/geturl/${shorturl}`,
+                    shorturl: `https://url-shortener-backend-l2je.onrender.com/${shorturl}`,
                     visit: 0,
                     createdAt: [{ date: date, month: month, year: year }],
                 },
             ]);
         const responseObj = {
             longurl: longurl,
-            shorturl: `http://localhost:4000/geturl/${shorturl}`
+            shorturl: `https://url-shortener-backend-l2je.onrender.com/${shorturl}`
         };
 
         response.status(200).json(responseObj);
@@ -344,13 +344,13 @@ app.get("/geturl/:shortenurl", async (request, response) => {
     const result = await client
         .db("urlShortener")
         .collection("shortURLs")
-        .findOne({ shorturl: `http://localhost:4000/geturl/${shortenurl}` });
+        .findOne({ shorturl: `https://url-shortener-backend-l2je.onrender.com/${shortenurl}` });
 
     if (result) {
         const result1 = await client
             .db("urlShortener")
             .collection("shortURLs")
-            .findOneAndUpdate({ shorturl: `http://localhost:4000/geturl/${shortenurl}` }, { $inc: { visit: 1 } });
+            .findOneAndUpdate({ shorturl: `https://url-shortener-backend-l2je.onrender.com/${shortenurl}` }, { $inc: { visit: 1 } });
 
         response.redirect(result.longurl);
     }
