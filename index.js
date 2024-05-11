@@ -344,13 +344,13 @@ app.get("/geturl/:shortenurl", async (request, response) => {
     const result = await client
         .db("urlShortener")
         .collection("shortURLs")
-        .findOne({ shorturl: `https://url-shortener-backend-l2je.onrender.com/${shortenurl}` });
+        .findOne({ shorturl: `https://url-shortener-backend-l2je.onrender.com/geturl/${shortenurl}` });
 
     if (result) {
         const result1 = await client
             .db("urlShortener")
             .collection("shortURLs")
-            .findOneAndUpdate({ shorturl: `https://url-shortener-backend-l2je.onrender.com/${shortenurl}` }, { $inc: { visit: 1 } });
+            .findOneAndUpdate({ shorturl: `https://url-shortener-backend-l2je.onrender.com/geturl/${shortenurl}` }, { $inc: { visit: 1 } });
 
         response.redirect(result.longurl);
     }
